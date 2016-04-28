@@ -16,4 +16,5 @@ Dir['./initializers/*.rb'].each{ |s| load s }
 
 Dir['./resources/*.rb'].each{ |s| require s }
 
-p Project.all
+p "#{Project.site} #{Project.user} #{Project.password} #{Project.key}"
+p Project.all(params: { key: ENV['API_KEY'] })
