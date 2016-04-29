@@ -1,4 +1,6 @@
-require './resources/base_resource'
+require './resources/base'
 
-class Issue < BaseResource
+module Resource
+  class Issue < Base
+  end
 end

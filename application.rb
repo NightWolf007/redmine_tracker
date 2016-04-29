@@ -13,8 +13,8 @@
 # end
 
 Dir['./initializers/*.rb'].each{ |s| load s }
-
-Dir['./resources/*.rb'].each{ |s| require s }
-
-p Issue.all.inspect
-# p Project.all
+require './resources'
+p Resource::Issue.all
+p Resource::Project.all
+# p Resource::User.all
+p Resource::TimeEntry.all

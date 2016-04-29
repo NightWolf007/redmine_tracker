@@ -1,6 +1,6 @@
 require './resources/base.rb'
 
 module Resource
-  class Project < Base
+  class User < Base
   end
 end
