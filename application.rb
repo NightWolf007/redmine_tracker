@@ -14,7 +14,3 @@
 
 Dir['./initializers/*.rb'].each{ |s| load s }
 require './resources'
-p Resource::Issue.all
-p Resource::Project.all
-# p Resource::User.all
-p Resource::TimeEntry.all
