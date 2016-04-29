@@ -1,16 +1,21 @@
-# Shoes.app height: 150, width: 250 do
-#   background rgb(240, 250, 208)
-#   stack margin: 10 do
-#     button "Start" do
-#       @time = Time.now
-#       @label.replace "Stop watch started at #@time"
-#     end
-#     button "Stop" do
-#       @label.replace "Stopped, ", strong("#{Time.now - @time}"), " seconds elapsed."
-#     end
-#     @label = para "Press ", strong("start"), " to begin timing."
-#   end
-# end
+require 'green_shoes'
+require './router'
+require './views/projects'
 
-Dir['./initializers/*.rb'].each{ |s| load s }
-require './resources'
+class Application < Shoes
+  url '/', :index
+
+  def self.run(resource)
+    Shoes.app(title: 'Redmine Tracker',
+              height: 600, width: 400) do
+      Router.app = self
+      visit '/'
+      p location
+      # Router.path_for(resource).index
+    end
+  end
+
+  def index
+    Projects.index(self, nil)
+  end
+end
