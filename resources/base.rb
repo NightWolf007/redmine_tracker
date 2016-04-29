@@ -4,10 +4,10 @@ require './lib/json_formatter'
 module Resource
   class Base < ActiveResource::Base
     self.site = ENV['URL']
-    self.user = ENV['USERNAME']
-    self.password = ENV['PASSWORD']
+    self.user = ENV['RUSERNAME']
+    self.password = ENV['RPASSWORD']
     self.format = ::JsonFormatter.new(:collection_name)
 
-    headers['X-Redmine-API-Key'] = ENV['API_KEY']
+    self.headers['X-Redmine-API-Key'] = ENV['API_KEY']
   end
 end

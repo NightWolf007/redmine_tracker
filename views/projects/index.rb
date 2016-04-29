@@ -1,16 +1,17 @@
-require './helpers/views_helper'
+require './styles/body'
 require './router'
 
 module Projects
-  def self.index(app, projects)
+  def self.index(body, projects)
 
-    app.stack do
-      # projects.each do |project|
-      #   button project.name, ViewsHelper.button_style do
-      #     # Router.path_for(:projects).show(project.id)
-      #   end
-      # end
-      app.para 'nYAN'
+    body.app do
+      @body.clear do
+        projects.each do |project|
+          button project.name, Styles::Body.button do
+            Router.path_for(:projects).show(project.id)
+          end
+        end
+      end
     end
 
   end

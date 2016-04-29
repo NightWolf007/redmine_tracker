@@ -1,14 +1,16 @@
-require './helpers/views_helper'
+require './styles/body'
 
 module Projects
-  def self.show(app, project)
+  def self.show(body, project)
 
-    app.stack do
-      app.para "Name: #{project.name}"
-      app.para "Description: #{project.description}"
-      app.para "Created at: #{project.created_on
-                                     .to_datetime
-                                     .strftime('%Y:%m:%d %H:%M:%S')}"
+    body.app do
+      @body.clear do
+        para "Name: #{project.name}"
+        para "Description: #{project.description}"
+        para "Created at: #{project.created_on
+                                   .to_datetime
+                                   .strftime('%Y:%m:%d %H:%M:%S')}"
+      end
     end
 
   end
