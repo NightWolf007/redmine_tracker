@@ -1,12 +1,10 @@
 require 'active_resource'
 
 class BaseResource < ActiveResource::Base
-  class << self
-    attr_accessor :key
-  end
+  self.site = ENV['URL']
+  self.user = ENV['USERNAME']
+  self.password = ENV['PASSWORD']
+  self.format = :json
 
-  def save
-    prefix_options[:key] = self.class.key
-    super
-  end
+  headers['X-Redmine-API-Key'] = ENV['API_KEY']
 end
