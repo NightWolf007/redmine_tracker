@@ -16,4 +16,5 @@ Dir['./initializers/*.rb'].each{ |s| load s }
 
 Dir['./resources/*.rb'].each{ |s| require s }
 
-p Project.all.inspect
+p Issue.all.inspect
+# p Project.all
