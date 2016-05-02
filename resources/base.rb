@@ -9,5 +9,9 @@ module Resource
     self.format = ::JsonFormatter.new(:collection_name)
 
     self.headers['X-Redmine-API-Key'] = ENV['API_KEY']
+
+    def serialize
+      as_json.symbolize_keys
+    end
   end
 end
