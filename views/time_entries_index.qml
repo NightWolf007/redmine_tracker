@@ -3,26 +3,26 @@ import QtQuick.Controls 1.1
 import QtQuick.Layouts 1.1
 import Material 0.2
 
-import IssuesController 1.0
+import TimeEntriesController 1.0
 
 ListView {
-    id: issues_index
+    id: time_entries_index
 
-    model: issues.model
+    model: time_entries.model
     spacing: 10
     maximumFlickVelocity: 600
 
     anchors.fill: parent
     anchors.bottomMargin: Units.dp(40)
 
-    property var refresh: ( function() { issues.index() } )
+    property var refresh: ( function() { time_entries.index() } )
 
     delegate: ColumnLayout {
         anchors.left: parent.left
         anchors.right: parent.right
 
         Component.onCompleted: {
-            content_loader.updateHeaderTitle('Issues')
+            content_loader.updateHeaderTitle('Time Entries')
         }
         
         Button {
@@ -31,10 +31,9 @@ ListView {
             elevation: 1
 
             Text {
-                text: subject
+                text: comments + ' ' + user.name + ' ' + hours
                 
-                anchors.left: parent.left
-                anchors.right: parent.right
+                anchors.fill: parent
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.leftMargin: 10
 
@@ -47,7 +46,7 @@ ListView {
         }
     }
 
-    IssuesController {
-        id: issues
+    TimeEntriesController {
+        id: time_entries
     }
 }

@@ -27,16 +27,8 @@ class IssuesController
   def show(id)
     Thread.new do
       QML.next_tick do
-        model.clear
-        issues.clear
-        project = Resource::Project.find(id.to_i)
-        model << project.serialize
-        Resource::Issue.where(project_id: project.id).each do |issue|
-          issues << issue.serialize
-        end
-        issues
       end
     end
-    model
+    nil
   end
 end

@@ -6,10 +6,14 @@ import Material 0.2
 import UsersController 1.0
 
 ApplicationWindow {
+    id: application
+
     visible: true
     title: "RedmineTracker"
     width: 800
     height: 600
+
+    property var current_user: null
 
     RowLayout {
         id: layout
@@ -40,18 +44,26 @@ ApplicationWindow {
                         height: Units.dp(50)
                         elevation: 1
 
-                        ColumnLayout {
+                        Component.onCompleted: (application.current_user = model)
+
+                        Button {
                             anchors.fill: parent
-                            anchors.leftMargin: 10
 
-                            Text {
-                                text: firstname + " " + lastname
-                                font.pointSize: Units.dp(10)
-                            }
+                            onClicked: content_loader.goto_page_force(content_loader.userTimeEntriesIndex)
 
-                            Text {
-                                text: mail
-                                font.pointSize: Units.dp(8)
+                            ColumnLayout {
+                                anchors.fill: parent
+                                anchors.leftMargin: 10
+
+                                Text {
+                                    text: firstname + " " + lastname
+                                    font.pointSize: Units.dp(10)
+                                }
+
+                                Text {
+                                    text: mail
+                                    font.pointSize: Units.dp(8)
+                                }
                             }
                         }
                     }
@@ -78,6 +90,8 @@ ApplicationWindow {
                     text: 'Time Entries'
                     anchors.left: parent.left
                     anchors.right: parent.right
+
+                    onClicked: content_loader.goto_page_force(content_loader.timeEntriesIndex)
                 }
                 Button {
                     text: 'Activity'
@@ -148,6 +162,9 @@ ApplicationWindow {
                 readonly property var projectsShow: "projects_show.qml"
                 readonly property var issuesIndex: "issues_index.qml"
                 readonly property var issuesShow: "issues_show.qml"
+                readonly property var timeEntriesIndex: "time_entries_index.qml"
+                readonly property var userTimeEntriesIndex: "user_time_entries_index.qml"
+                readonly property var timeEntriesShow: "time_entries_show.qml"
 
                 property var show_id: 0
                 property var current_url: projectsIndex
@@ -155,39 +172,39 @@ ApplicationWindow {
 
                 source: projectsIndex
 
-                readonly property var refresh: { function() { item.refresh(show_id) } }
-                readonly property var updateHeaderTitle: { function(title) { header.title = title } }
+                readonly property var refresh: ( function() { item.refresh(show_id) } )
+                readonly property var updateHeaderTitle: ( function(title) { header.title = title } )
 
-                readonly property var load_page: {
+                readonly property var load_page: (
                     function(url, id) {
                         current_url = url
                         show_id = id
                         setSource(url)
                     }
-                }
+                )
 
-                readonly property var goto_page_force: {
+                readonly property var goto_page_force: (
                     function(url, id) {
                         page_stack = []
                         load_page(url, id)
                     }
-                }
+                )
 
-                readonly property var goto_page: {
+                readonly property var goto_page: (
                     function(url, id) {
                         page_stack.push({ "url" : current_url, "show_id" : show_id })
                         load_page(url, id)
                     }
-                }
+                )
 
-                readonly property var goto_prev: {
+                readonly property var goto_prev: (
                     function() {
                         var prev = page_stack.pop()
                         if (prev != null) {
                             load_page(prev.url, prev.show_id)
                         }
                     }
-                }
+                )
 
                 onLoaded: {
                     refresh()

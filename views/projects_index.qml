@@ -15,7 +15,7 @@ ListView {
     anchors.fill: parent
     anchors.bottomMargin: Units.dp(40)
 
-    property var refresh: (function() { projects.index() })
+    property var refresh: ( function() { projects.index() } )
 
     delegate: ColumnLayout {
         anchors.left: parent.left
