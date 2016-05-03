@@ -65,7 +65,7 @@ ApplicationWindow {
                     anchors.left: parent.left
                     anchors.right: parent.right
 
-                    onClicked: content_loader.setSource(content_loader.projectsIndex)
+                    onClicked: content_loader.goto_page_force(content_loader.projectsIndex)
                 }
                 Button {
                     text: 'Issues'
@@ -99,8 +99,6 @@ ApplicationWindow {
         ColumnLayout {
             Layout.fillHeight: true
             Layout.fillWidth: true
-
-            Component.onCompleted: content_loader.item
             
             RowLayout {
                 id: header
@@ -117,8 +115,8 @@ ApplicationWindow {
                     id: back_button
                     iconName: 'navigation/arrow_back'
                     anchors.left: parent.left
-                    onClicked: content_loader.setSource(content_loader.item.back)
-                    visible: true
+
+                    onClicked: content_loader.goto_prev()
                 }
 
                 Text {
@@ -129,7 +127,8 @@ ApplicationWindow {
                 IconButton {
                     iconName: 'navigation/refresh'
                     anchors.right: parent.right
-                    onClicked: content_loader.item.refresh()
+
+                    onClicked: content_loader.refresh()
                 }
             }
 
@@ -139,18 +138,56 @@ ApplicationWindow {
                 anchors.top: header.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
-                anchors.topMargin: Units.dp(35)
+                anchors.topMargin: Units.dp(30)
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
-                readonly property var projectsIndex: "projects/projects_index.qml"
-                readonly property var projectsShow: "projects/projects_show.qml"
+                readonly property var projectsIndex: "projects_index.qml"
+                readonly property var projectsShow: "projects_show.qml"
+
+                property var show_id: 0
+                property var current_url: projectsIndex
+                property var page_stack: []
 
                 source: projectsIndex
 
+                readonly property var refresh: { function() { item.refresh(show_id) } }
+                readonly property var updateHeaderTitle: { function(title) { header.title = title } }
+
+                readonly property var load_page: {
+                    function(url, id) {
+                        current_url = url
+                        show_id = id
+                        setSource(url)
+                    }
+                }
+
+                readonly property var goto_page_force: {
+                    function(url, id) {
+                        page_stack = []
+                        load_page(url, id)
+                    }
+                }
+
+                readonly property var goto_page: {
+                    function(url, id) {
+                        page_stack.push({ "url" : current_url, "show_id" : show_id })
+                        load_page(url, id)
+                    }
+                }
+
+                readonly property var goto_prev: {
+                    function() {
+                        var prev = page_stack.pop()
+                        if (prev != null) {
+                            load_page(prev.url, prev.show_id)
+                        }
+                    }
+                }
+
                 onLoaded: {
-                    header.title = item.header_title
-                    back_button.visible = (item.back != null)
+                    refresh()
+                    back_button.visible = (page_stack.length > 0)
                 }
             }
         }

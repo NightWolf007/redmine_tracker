@@ -10,22 +10,27 @@ ListView {
 
     model: projects.model
     spacing: 10
+    maximumFlickVelocity: 500
 
-    Component.onCompleted: projects.index()
-
-    property var header_title: 'Projects'
     property var refresh: (function() { projects.index() })
-    property var back: null
 
     delegate: ColumnLayout {
         anchors.left: parent.left
         anchors.right: parent.right
+
+        Component.onCompleted: {
+            content_loader.updateHeaderTitle('Projects')
+        }
         
         Button {
             text: name
             anchors.left: parent.left
             anchors.right: parent.right
             elevation: 1
+
+            onClicked: {
+                content_loader.goto_page(content_loader.projectsShow, id)
+            }
         }
     }
 

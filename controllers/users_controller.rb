@@ -9,6 +9,11 @@ class UsersController
   property(:current) { QML::ArrayModel.new(*Resource::User::ATTRS) }
 
   def load_current_user
-    current << Resource::User.current.serialize
+    Thread.new do
+      QML.next_tick do
+        current << Resource::User.current.serialize
+      end
+    end
+    current
   end
 end
