@@ -84,7 +84,7 @@ ColumnLayout {
         anchors.topMargin: Units.dp(170)
         anchors.bottomMargin: Units.dp(40)
         spacing: 10
-        maximumFlickVelocity: 500
+        maximumFlickVelocity: 600
 
         delegate: ColumnLayout {
             anchors.left: parent.left
@@ -97,7 +97,7 @@ ColumnLayout {
 
                 Text {
                     text: subject
-                    
+
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter

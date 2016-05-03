@@ -10,7 +10,10 @@ ListView {
 
     model: projects.model
     spacing: 10
-    maximumFlickVelocity: 500
+    maximumFlickVelocity: 600
+
+    anchors.fill: parent
+    anchors.bottomMargin: Units.dp(40)
 
     property var refresh: (function() { projects.index() })
 

@@ -71,6 +71,8 @@ ApplicationWindow {
                     text: 'Issues'
                     anchors.left: parent.left
                     anchors.right: parent.right
+
+                    onClicked: content_loader.goto_page_force(content_loader.issuesIndex)
                 }
                 Button {
                     text: 'Time Entries'
@@ -144,6 +146,8 @@ ApplicationWindow {
 
                 readonly property var projectsIndex: "projects_index.qml"
                 readonly property var projectsShow: "projects_show.qml"
+                readonly property var issuesIndex: "issues_index.qml"
+                readonly property var issuesShow: "issues_show.qml"
 
                 property var show_id: 0
                 property var current_url: projectsIndex
