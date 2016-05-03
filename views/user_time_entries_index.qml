@@ -31,7 +31,7 @@ ListView {
             elevation: 1
 
             Text {
-                text: comments + ' ' + user.name + ' ' + hours
+                text: comments + ' ' + spent_on + ' ' + hours
                 
                 anchors.fill: parent
                 anchors.verticalCenter: parent.verticalCenter
