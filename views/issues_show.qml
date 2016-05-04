@@ -29,61 +29,68 @@ ColumnLayout {
                 content_loader.updateHeaderTitle(subject)
             }
 
-            ColumnLayout {
+            Flickable {
                 anchors.fill: parent
-                anchors.leftMargin: 10 
+                anchors.leftMargin: 10
+                anchors.rightMargin: 50
+                contentHeight: issues_show_card_layout.height
 
-                Text {
-                    text: subject
-                    Layout.fillWidth: true
-                    font.pointSize: Units.dp(10)
-                    wrapMode: Text.WordWrap
-                }
-
-                Text {
-                    text: description
-                    Layout.fillWidth: true
-                    font.pointSize: Units.dp(8)
-                    wrapMode: Text.WordWrap
-                }
-
-                Text {
-                    text: "Subject: " + subject
-                    font.pointSize: Units.dp(8)
-                }
-
-                Text {
-                    text: "Priority: " + priority
-                    font.pointSize: Units.dp(8)
-                }
-
-                Text {
-                    text: "Start date: " + start_date
-                    font.pointSize: Units.dp(8)
-                }
-
-                Text {
-                    text: "Created at: " + created_on
-                    font.pointSize: Units.dp(8)
-                }
-
-                Text {
-                    text: "Updated at: " + updated_on
-                    font.pointSize: Units.dp(8)
-                }
-
-                RowLayout {
-                    visible: (model.parent != null)
+                ColumnLayout {
+                    id: issues_show_card_layout
+                    // anchors.fill: parent
 
                     Text {
-                        text: "Project: "
+                        text: subject
+                        Layout.fillWidth: true
+                        font.pointSize: Units.dp(10)
+                        wrapMode: Text.WordWrap
+                    }
+
+                    Text {
+                        text: description
+                        Layout.fillWidth: true
+                        font.pointSize: Units.dp(8)
+                        wrapMode: Text.WordWrap
+                    }
+
+                    Text {
+                        text: "Subject: " + subject
                         font.pointSize: Units.dp(8)
                     }
 
-                    Button {
-                        text: project.name
-                        onClicked: {
-                            content_loader.goto_page(projectsShow, project.id)
+                    Text {
+                        text: "Priority: " + priority
+                        font.pointSize: Units.dp(8)
+                    }
+
+                    Text {
+                        text: "Start date: " + start_date
+                        font.pointSize: Units.dp(8)
+                    }
+
+                    Text {
+                        text: "Created at: " + created_on
+                        font.pointSize: Units.dp(8)
+                    }
+
+                    Text {
+                        text: "Updated at: " + updated_on
+                        font.pointSize: Units.dp(8)
+                    }
+
+                    RowLayout {
+                        visible: (model.parent != null)
+
+                        Text {
+                            text: "Project: "
+                            font.pointSize: Units.dp(8)
+                        }
+
+                        Button {
+                            text: project.name
+                            onClicked: {
+                                content_loader.goto_page(projectsShow, project.id)
+                            }
                         }
                     }
                 }

@@ -137,7 +137,9 @@ ApplicationWindow {
 
                 Text {
                     text: header.title
+                    anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
+                    Layout.maximumWidth: 400
                     wrapMode: Text.WordWrap
                 }
 
