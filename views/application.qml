@@ -163,8 +163,8 @@ ApplicationWindow {
                 readonly property var issuesIndex: "issues_index.qml"
                 readonly property var issuesShow: "issues_show.qml"
                 readonly property var timeEntriesIndex: "time_entries_index.qml"
-                readonly property var userTimeEntriesIndex: "user_time_entries_index.qml"
                 readonly property var timeEntriesShow: "time_entries_show.qml"
+                readonly property var userTimeEntriesIndex: "user_time_entries_index.qml"
 
                 property var show_id: 0
                 property var current_url: projectsIndex

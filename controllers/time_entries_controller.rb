@@ -29,11 +29,10 @@ class TimeEntriesController
   end
 
   def user_index(user_id)
-    p user_id
     Thread.new do
       QML.next_tick do
         model.clear
-        Resource::TimeEntry.where(user_id: user_id).each do |time_entry|
+        Resource::TimeEntry.where(user_id: user_id.to_i).each do |time_entry|
           model << time_entry.serialize
         end
       end
