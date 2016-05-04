@@ -41,9 +41,9 @@ ListView {
                 wrapMode: Text.WordWrap
             }
 
-            // onClicked: {
-            //     content_loader.goto_page(content_loader.projectsShow, id)
-            // }
+            onClicked: {
+                content_loader.goto_page(content_loader.issuesShow, id)
+            }
         }
     }
 

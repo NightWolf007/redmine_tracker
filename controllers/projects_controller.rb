@@ -33,7 +33,6 @@ class ProjectsController
         Resource::Issue.where(project_id: project.id).each do |issue|
           issues << issue.serialize
         end
-        issues
       end
     end
     model

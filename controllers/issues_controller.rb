@@ -27,8 +27,15 @@ class IssuesController
   def show(id)
     Thread.new do
       QML.next_tick do
+        model.clear
+        time_entries.clear
+        issue = Resource::Issue.find(id.to_i)
+        model << issue.serialize
+        Resource::TimeEntry.where(issue_id: issue.id).each do |time_entry|
+          time_entries << time_entry.serialize
+        end
       end
     end
-    nil
+    model
   end
 end

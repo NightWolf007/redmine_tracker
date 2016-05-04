@@ -138,9 +138,11 @@ ApplicationWindow {
                 Text {
                     text: header.title
                     anchors.horizontalCenter: parent.horizontalCenter
+                    wrapMode: Text.WordWrap
                 }
 
                 IconButton {
+                    id: refresh_button
                     iconName: 'navigation/refresh'
                     anchors.right: parent.right
 
